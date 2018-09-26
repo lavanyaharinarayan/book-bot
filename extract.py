@@ -35,8 +35,10 @@ class GutenbergPlaintext(Extract):
 
 	def _split(self, text):
 		# Split paragraphs
-		paragraph = "\n\n"
-		return text.split(paragraph)
+		paragraph = "\r\n\n\r\n"
+		space = "\r\n"
+		text = text.split(paragraph)
+		return [paragraph.replace(space, " ").replace("  ", " ") for paragraph in text]
 
 	def parse(self):
 		return self._split(self._extract_text())
